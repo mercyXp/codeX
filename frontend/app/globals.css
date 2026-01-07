@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
+/* ===============================
+   Theme Tokens (Default = Light)
+   =============================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 0 0% 100%;        /* white */
+  --surface: 210 40% 96%;         /* light gray */
+  --primary: 199 89% 48%;         /* cyan/blue */
+  --primary-foreground: 0 0% 100%;
+
+  --text-primary: 222 47% 11%;    /* dark text */
+  --text-secondary: 215 15% 40%;
+
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
+  --ring: 199 89% 48%;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ===============================
+   Dark Theme Override
+   =============================== */
+
+.dark {
+  --background: 222 47% 11%;
+  --surface: 222 40% 15%;
+  --primary: 199 89% 48%;
+  --primary-foreground: 210 40% 98%;
+
+  --text-primary: 210 40% 98%;
+  --text-secondary: 215 20% 65%;
+
+  --border: 217 19% 27%;
+  --input: 217 19% 27%;
+  --ring: 199 89% 48%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ===============================
+   Base Layer
+   =============================== */
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--text-primary));
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ===============================
+   Components Layer
+   =============================== */
+
+@layer components {
+  .surface {
+    background-color: hsl(var(--surface));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+  }
+
+  .muted-text {
+    color: hsl(var(--text-secondary));
+  }
+
+  .primary-text {
+    color: hsl(var(--text-primary));
+  }
+
+  .focus-ring {
+    outline: none;
+  }
+
+  .focus-ring:focus-visible {
+    box-shadow:
+      0 0 0 2px hsl(var(--ring)),
+      0 0 0 4px hsl(var(--background));
+  }
+}
+
+/* ===============================
+   Utilities
+   =============================== */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }
