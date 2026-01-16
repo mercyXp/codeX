@@ -29,35 +29,61 @@ export default function MarketingPanel() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-sky-400 to-blue-600 px-6 py-16">
-         {/* Binary Background covering entire section */}
+    <section className="relative w-full overflow-hidden min-h-[70vh] md:min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-sky-500 to-blue-700 px-6 py-12 md:py-20">
+      {/* Binary Background */}
       <RandomBinaryBackground />
 
-      {/* Main Heading */}
-      <h2 className="relative z-10 mb-8 text-center text-5xl font-semibold text-white max-w-3xl leading-snug">
-        Learn programming, mathematics, backend fundamentals, and much more — effectively with CodeX.
-      </h2>
+      <div className="relative z-10 w-full max-w-4xl flex flex-col items-center">
+        {/* Main Heading - Scaled for Mobile */}
+        <h2 className="mb-10 text-center text-3xl md:text-5xl font-bold text-white leading-tight md:leading-snug">
+          Learn programming, mathematics, and backend fundamentals —{" "}
+          <span className="text-sky-200">effectively with CodeX.</span>
+        </h2>
 
-      {/* White Card */}
-      <div className="relative z-10 max-w-xl w-full bg-white rounded-xl shadow-lg p-8">
-        {/* Content */}
-        <h3 className="mb-2 text-lg font-semibold">{panels[index].title}</h3>
-        <p className="text-sm leading-relaxed">{panels[index].description}</p>
+        {/* White Card - Match AuthForm rounded-2xl */}
+        <div className="relative w-full max-w-xl bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-6 md:p-10">
+          {/* Content with Fixed Height to prevent jumping */}
+          <div className="min-h-[120px]">
+            <h3 className="mb-3 text-xl font-bold text-gray-900">
+              {panels[index].title}
+            </h3>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              {panels[index].description}
+            </p>
+          </div>
 
-        {/* Navigation arrows */}
-        <div className="mt-6 flex justify-end gap-2">
-          <button
-            onClick={handlePrev}
-            className="flex h-9 w-9 items-center justify-center rounded-md border hover:bg-gray-100 transition"
-          >
-            <ArrowLeft className="h-4 w-4" />
-          </button>
-          <button
-            onClick={handleNext}
-            className="flex h-9 w-9 items-center justify-center rounded-md border hover:bg-gray-100 transition"
-          >
-            <ArrowRight className="h-4 w-4" />
-          </button>
+          {/* Navigation and Indicators */}
+          <div className="mt-8 flex items-center justify-between">
+            {/* Dots Indicator */}
+            <div className="flex gap-2">
+              {panels.map((_, i) => (
+                <div
+                  key={i}
+                  className={`h-1.5 transition-all rounded-full ${
+                    index === i ? "w-6 bg-blue-600" : "w-2 bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Navigation arrows */}
+            <div className="flex gap-3">
+              <button
+                onClick={handlePrev}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-all shadow-sm active:scale-90"
+                aria-label="Previous slide"
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </button>
+              <button
+                onClick={handleNext}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 hover:text-blue-600 transition-all shadow-sm active:scale-90"
+                aria-label="Next slide"
+              >
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
