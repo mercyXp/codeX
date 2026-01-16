@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* Tell Tailwind to use class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
 /* ===============================
    Theme Tokens (Default = Light)
    =============================== */
